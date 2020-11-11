@@ -6,7 +6,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +19,9 @@ import androidx.fragment.app.Fragment;
 public class CrimeFragment extends Fragment {
     private Crime mCrime;
     private EditText mTitleField;
+    private Button mDateButton;
+    private CheckBox mSolvedCheckBox;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +54,16 @@ public class CrimeFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
 
             }
+        });
+
+        mDateButton = v.findViewById(R.id.crime_date);
+        mDateButton.setText(mCrime.getDate().toString());
+        mDateButton.setEnabled(false);
+
+        mSolvedCheckBox = v.findViewById(R.id.crime_solved);
+        mSolvedCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Set the crime' solved property
+            mCrime.setSolved(isChecked);
         });
 
 
